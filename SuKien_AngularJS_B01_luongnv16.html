@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <!-- Nhúng thư viện angularjs -->
+    <!-- Cách 1: Nhúng bằng link CDN -->
+    <!-- Nhanh gọn. Nhưng cần có internet -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+
+    <!-- Cách 2: Nhúng bằng file local -->
+    <!-- Tải 1 lần và dùng mãi mãi, không cần internet -->
+    <script src="lib/angular.js"></script>
+
+    <!-- Tương tự, ta thực hiện nhúng thư viện bootstrap -->
+    <!-- Nhúng thư viện bootstrap -->
+    <link rel="stylesheet" href="lib/bootstrap.css">
+    <script src="lib/bootstrap.js"></script>
+    
+    <script>
+        var app = angular.module("myApp", []);
+
+        app.controller("diThiCtrl", function($scope) {
+            console.log("// Log kiểm tra: Khởi tạo controller thành công");
+
+            // Demo data-binding
+            $scope.caThi = 2;
+            $scope.monThi = "WEB207";
+            $scope.danhSachThi = ["Nguyễn Văn A", "Nguyễn Thị B", "Trần Văn C"];
+
+
+            // Demo event-binding
+            $scope.onClickCauNoiYeuThich = function () {
+                console.log("// Log kiểm tra gọi hàm thành công");
+                alert("Ngày hôm nay khó khăn, ngày mai khó khăn hơn nữa. Nhưng ngày kia sẽ là điều tuyệt vời.")
+
+            }
+
+
+            // Demo 2way-data-binding
+            $scope.diemThiCuoiKy = 10;
+
+
+        }) // Kết thúc controller
+
+
+    </script>
+
+
+</head>
+<body ng-app="myApp">
+    <!-- 1. Khởi tạo ng-app có tên myApp -->
+    <!-- 1.1. Khởi tạo tại code html -->
+    <!-- 1.2. Khởi tạo tại code js -->
+
+    <!-- 2. Khởi tạo ng-controller có tên diThiCtrl -->
+    <!-- 2.1. Khởi tạo tại code html -->
+    <!-- 2.2. Khởi tạo tại code js -->
+    <!-- Lưu ý khu vực hoạt động code của controller -->
+
+    <div ng-controller="diThiCtrl" class="container-fluid">
+        <h1>Giới thiệu về angular js</h1>
+
+        <hr>
+        <h3>Giới thiệu về $scope</h3>
+        <p>$scope trong AngularJS giúp chúng ta chia sẻ dữ liệu giữa code js và html 1 cách nhanh chóng</p>
+
+
+        <hr>
+        <h3>Giới thiệu data-binding</h3>
+        <!-- 1. Khai báo html -->
+        <!-- 2. Khai báo biến $scope tại code js -->
+        <!-- 3. Liên kết biến $scope với html -->
+        <p>Ca thi là: {{diemThi}}</p>
+        <p>Môn thi: {{monThi}}</p>
+        <p>Danh sách thi:</p>
+        <ul>
+            <li ng-repeat="item in danhSachThi"> {{item}}</li>
+        </ul>
+
+
+        <hr>
+        <h3>Giới thiệu event-binding</h3>
+        <p>Dùng để bắt sự kiện tương tác của người dùng</p>
+        <p>Ví dụ: Bắt sự kiện click button và alert ra màn hình 1 câu nói yêu thích</p>
+        <!-- 1. Khai báo html -->
+        <!-- 2. Khai báo code js -->
+        <!-- 3. Liên kết html và code js -->
+        <button class="btn btn-primary" ng-click="onClickCauNoiYeuThich()">Câu Nói Yêu Thích</button>
+
+
+        <hr>
+        <h3>Giới thiệu 2way-data-binding</h3>
+        <p>Dùng để đồng động dữ liệu 2 chiều giữa html và code js</p>
+        <p>Tức là: Khi người dùng thay đổi giá trị tại html thì code js tự nhận giá trị mới</p>
+        <p>Và ngược lại: Khi code js thay đổi giá trị thì html tự kiển thị giá trị mới</p>
+        <p>Ví dụ: Khai báo input nhập điểm thi cuối kỳ và in ra màn hình kết quả</p>
+        <!-- 1. Khai báo html -->
+        <!-- 2. Khai báo code js -->
+        <!-- 3. Liên kết html và code js -->
+        <!-- 3.1. Liên kết với thẻ p để hiển thị giá trị biến ra html -->
+        <!-- 3.2. Liên kết với input để nhận giá trị người dùng nhập vào  -->
+        <div>
+            <span>Nhập điểm thi cuối kỳ: </span>
+            <input type="text" ng-model="diemThiCuoiKy">
+        </div>
+        <p>Kết quả thi cuối kỳ là: {{diemThiCuoiKy}}</p>
+
+
+        <hr>
+        <p>Ví dụ thêm 1 tí: Hiển thị trạng thái "Qua môn" và "Gần qua môn" theo điểm số nhập vào</p>
+        <!-- 1. Khai báo html -->
+        <!-- 2. Khai báo code js -->
+        <!-- 3. Liên kết html và code js -->
+        <div>
+            <span>Trạng thái môn học:</span>
+            <span class="badge bg-success" ng-if="diemThiCuoiKy >= 5">Qua môn</span>
+            <span class="badge bg-danger" ng-if="diemThiCuoiKy < 5">Gần qua môn</span>
+        </div>
+
+    </div> <!-- Kết thúc controller -->
+    
+    
+</body>
+</html>
